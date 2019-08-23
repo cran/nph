@@ -1,0 +1,27 @@
+---
+title: "nph: report for power"
+output: html_document
+params:
+  input: NA
+  p_pow: NA
+---
+
+```{r}
+# Output results --------------------------------------------------------
+p_results <- 
+  data.frame(
+    Test = c("Maximum Logrank", rep("Weighted Logrank", 4)),
+    rho = c("0011", 0, 0, 1, 1),
+    gamma = c("0101", 0, 1, 0, 1),
+    power = params$p_pow) 
+
+p_results
+```
+
+```{r}
+# Output results --------------------------------------------------------
+knitr::kable(p_results)
+```
+
+
+

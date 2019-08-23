@@ -1,0 +1,47 @@
+---
+title: "nph: report for conditional power - R code"
+output: html_document
+params:
+  input: NA
+  cp_pow: NA
+  intplot: NA
+  dat: NA
+  K5: NA
+  B5: NA
+---
+
+```{r eval=FALSE, include=FALSE}
+knitr::opts_chunk(echo = TRUE, eval = FALSE)
+```
+
+```{r}
+# Output results --------------------------------------------------------
+intplot = params$intplot
+dat = params$dat
+K5  = params$K5
+B5  = params$B5
+cp_pow = params$cp_pow
+```
+
+```{r}
+head(dat)
+intplot(dat, K5, B5, main = "Interim data")
+
+# Output results --------------------------------------------------------
+p_results <- 
+  data.frame(
+    Test  = c("Maximum Logrank", rep("Weighted Logrank", 4)),
+    rho   = c("0011", 0, 0, 1, 1),
+    gamma = c("0101", 0, 1, 0, 1),
+    power = cp_pow) 
+
+p_results
+```
+
+```{r}
+# Output results --------------------------------------------------------
+knitr::kable(p_results)
+```
+
+
+

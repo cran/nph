@@ -1,0 +1,13 @@
+name: nphaz
+title: nphaz
+username:
+account: nballarini
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 544732
+bundleId: 1947156
+url: https://nballarini.shinyapps.io/nphaz/
+when: 1552904079.44916
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: interim-data.csv|interim-data.txt|interim-data.xls|my-report-condpower.pdf|my-report.pdf

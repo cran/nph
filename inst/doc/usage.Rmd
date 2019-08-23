@@ -1,0 +1,349 @@
+﻿---
+title: "Introduction to nph and Usage Instructions"
+author: "Robin Ristl, Nicolás Ballarini"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to nph and Usage Instructions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Overview 
+
+The nph package includes functions to model survival distributions in terms of piecewise constant hazards and 
+to simulate data from the specified distributions.
+
+# Installation {-}
+
+The package is available from CRAN and can be installed directly from R.
+
+```{r eval=FALSE, fig.show='hold'}
+install.packages("nph")
+
+# For dev version
+# install.packages("devtools")
+devtools::install_github("repo/nph")
+```
+
+# Getting started
+
+Basically, there are three mechanisms for non-proportionality available in this package:
+
+  - Disease progression
+  - Different effect by time intervals
+  - Subgroups
+
+These scenarios are illustrated in the following figures. Note that the hazard ratio is not constant across time. 
+
+```{r echo=FALSE, fig.height=3.5, fig.show='hold', fig.width=10, warning=FALSE, out.width='100%'}
+library(nph)
+times <- c(0, 5 * 365)   # Time interval boundaries, in days
+
+# Treatment group
+t_resp <- 1              # There are no subgroups
+B5 <- pop_pchaz(
+  T = times,
+  lambdaMat1    = m2r(matrix(18, nrow = 1)),
+  lambdaMat2    = m2r(matrix(11, nrow = 1)),
+  lambdaProgMat = m2r(matrix( 9, nrow = 1)),
+  p = t_resp,
+  timezero = FALSE, discrete_approximation = TRUE
+)
+
+# Control group
+c_resp <- 1              # There are no subgroups
+K5  <- pop_pchaz(
+  T = times,
+  lambdaMat1    = m2r(matrix(11, nrow = 1)),
+  lambdaMat2    = m2r(matrix( 9, nrow = 1)),
+  lambdaProgMat = m2r(matrix( 5, nrow = 1)),
+  p = c_resp,
+  timezero = TRUE, discrete_approximation = TRUE
+)
+plot_shhr(A = K5, B = B5, main = "Different disease progression by treatment")
+```
+
+```{r echo=FALSE, fig.height=3.5, fig.show='hold', fig.width=10, warning=FALSE, out.width='100%'}
+times <- c(0, 100, 5 * 365)   # Time interval boundaries, in days
+
+# Treatment group
+t_resp <- 1               # There are no subgroups
+B5 <- pop_pchaz(
+  T = times,
+  lambdaMat1    = m2r(matrix(c(11, 18), nrow = 1)),
+  lambdaMat2    = m2r(matrix(c( 9, 11), nrow = 1)),
+  lambdaProgMat = m2r(matrix(c( 5,  9), nrow = 1)),
+  p = t_resp,
+  timezero = FALSE, discrete_approximation = TRUE
+)
+
+# Control group
+c_resp <- 1 
+K5  <- pop_pchaz(
+  T = times,
+  lambdaMat1    = m2r(matrix(c(11, 11), nrow = 1)),
+  lambdaMat2    = m2r(matrix(c( 9,  9), nrow = 1)),
+  lambdaProgMat = m2r(matrix(c( 5,  5), nrow = 1)),
+  p = c_resp,
+  timezero = TRUE, discrete_approximation = TRUE
+)
+
+plot_shhr(K5, B5, main = "Different effect by time intervals")
+```
+
+```{r echo=FALSE, fig.height=3.5, fig.show='hold', fig.width=10, warning=FALSE, out.width='100%'}
+times <- c(0, 5 * 365)   # Time interval boundaries, in days
+
+# Treatment group
+t_resp <-  c(.2, .8)
+B5 <- pop_pchaz(
+  T = times,
+  lambdaMat1    = m2r(matrix(c(30,
+                               18),nrow = 2)),
+  lambdaMat2    = m2r(matrix(c(20,
+                               11),nrow = 2)),
+  lambdaProgMat = m2r(matrix(c(15, 
+                               9), nrow = 2)),
+  p = t_resp,
+  timezero = FALSE, discrete_approximation = TRUE
+)
+
+# Control group
+c_resp <- 1 
+K5  <- pop_pchaz(
+  T = times,
+  lambdaMat1    = m2r(matrix(11,nrow = 1)),
+  lambdaMat2    = m2r(matrix(9, nrow = 1)),
+  lambdaProgMat = m2r(matrix(5, nrow = 1)),
+  p = c_resp,
+  timezero = TRUE, discrete_approximation = TRUE
+)
+
+plot_shhr(K5, B5, main = "Presence of subgroups with differential treatment effect")
+```
+
+
+# Basics
+
+The functions of the package can be grouped according to their functionality.
+
+Functions for modelling/setting the underlying survival model:
+  
+  - `hazVFfun`
+  - `subpop_pchaz`
+  - `pop_pchaz`
+  
+Functions for generating simulated dataset given for a specified survival model:
+
+  - `sample_fun`
+  - `sample_conditional_fun`
+  
+Functions for performing statistical tests:
+
+  - `logrank.test`
+  - `logrank.maxtest`
+
+Plotting functions:
+
+  - `plot.mixpch`
+  - `plot_diagram`
+  - `plot_shhr`
+
+
+The basic underlying model for the survival mechanism assumes that each patient can be in one of three states: Alive with no progression of disease, Alive with progression of disease, and Dead.
+
+```{r echo=FALSE, fig.height=4, fig.show='hold', fig.width=7, message=FALSE, warning=FALSE, out.width='75%', paged.print=TRUE}
+times <- c(0, 5 * 365)   # Time interval boundaries, in days
+
+# Treatment group
+t_resp <- 1              # There are no subgroups
+B5 <- pop_pchaz(
+  T = times,
+  lambdaMat1    = m2r(matrix(18, nrow = 1)),
+  lambdaMat2    = m2r(matrix(11, nrow = 1)),
+  lambdaProgMat = m2r(matrix( 9, nrow = 1)),
+  p = t_resp,
+  timezero = FALSE, discrete_approximation = TRUE
+)
+
+# Control group
+c_resp <- 1              # There are no subgroups
+K5  <- pop_pchaz(
+  T = times,
+  lambdaMat1    = m2r(matrix(11, nrow = 1)),
+  lambdaMat2    = m2r(matrix( 9, nrow = 1)),
+  lambdaProgMat = m2r(matrix( 5, nrow = 1)),
+  p = c_resp,
+  timezero = TRUE, discrete_approximation = TRUE
+)
+plot_diagram(K5, B5, which = "Control")
+```
+
+## Creating the population model with pop_pchaz
+
+The first step is to create the population model with the `pop_pchaz` function.
+As the previous figure shows, there are three hazard rates that need to be defined: the hazard of disease progression $\lambda_P(t)$, the hazard of death given no progression $\lambda_P(t)$, and the hazard of death given progression $\lambda_P(t)$. The arguments `lambdaProgMat`, `lambdaMat1`, and `lambdaMat2` in the `pop_pchaz` function correspond to the three hazard rates, respectively. 
+
+The hazard rates are assumed piecewise constant functions across $k$ time intervals $[t_{j-1}, t_j)$, $j=1, \ldots,k$ with $0=t_0<t_1<\ldots<t_k=\infty$. Therefore, the `pop_pchaz` function has also an argument `T` that is a vector to specify $t_0,t_1,\ldots,t_k$. When `T` is of length 2 (and therefore only one time interval) `lambdaProgMat`, `lambdaMat1`, and `lambdaMat2` are scalars. If `T` is of length > 2, then the `lambdaProgMat`, `lambdaMat1`, and `lambdaMat2` are matrices where the number of columns is equal to the number of time intervals 
+\[\begin{bmatrix}\lambda^{[t_0-t_1)} & \lambda^{[t_1-t_2)} & \ldots &\lambda^{[t_{k-1}-t_k)}\end{bmatrix}.\]
+
+For example, if the patients are followed for two years but the hazards change after the first year, then `T` should be specified as `c(0, 365, 2*365)`. If we assume a hazard rate for death of 0.02 and 0.04 for the first and second year respectively, the we should specify `lambdaMat1 = matrix(c(0.02, 0.04), ncol = 2)`. 
+
+Finally, is is also possible to specify different hazard rates for subgroups. The `pop_pchaz` has the argument `p` which is intended to specify the subgroup prevalences. Given $m$ subgroups with relative sizes $p_1, p_2, \ldots, p_m$, then the `p` argument should be specified as `c(p_1, p_2, ..., p_m)`. The `lambdaProgMat`, `lambdaMat1`, and `lambdaMat2` then should have the number of row equal to the number of defined subgroups:
+
+\[
+\begin{bmatrix}
+\lambda_1 \\ 
+\lambda_2 \\ 
+\ldots \\
+\lambda_m
+\end{bmatrix}.
+\]
+
+For example, if patients can be divided into two subgroup with prevalences 0.2 and 0.8 with hazard rates a hazard rate for death of 0.02 and 0.03 thoughout a one year interval, then we define `T = c(0, 365)`, `p = c(0.2, 0.8)` and `lambdaMat1 = matrix(c(0.02, 0.03), nrow = 2)`. 
+
+Naturally, it is possible to combine multiple time intervals and subgroups, then the hazard matrices have the form:
+<!-- \[ -->
+<!-- \begin{bmatrix} -->
+<!-- \lambda_1^{[t_0-t_1)} & \lambda_1^{[t_1-t_2)} & \ldots &\lambda_1^{[t_{k-1}-t_k)} \\ -->
+<!-- \lambda_2^{[t_0-t_1)} & \lambda_2^{[t_1-t_2)} & \ldots &\lambda_2^{[t_{k-1}-t_k)} \\ -->
+<!-- \ldots \\ -->
+<!-- \lambda_m^{[t_0-t_1)} & \lambda_m^{[t_1-t_2)} & \ldots &\lambda_m^{[t_{k-1}-t_k)} \\ -->
+<!-- \end{bmatrix}. -->
+<!-- \] -->
+
+```{r echo=FALSE, fig.align='center', fig.show='hold', fig.width=12.5, warning=FALSE, out.width='50%'}
+knitr::include_graphics("lambdamat.png")
+```
+
+Below, we consider an example where there two subgroups and two time intervals. In practice, this situation correspond to the case where there is a delayed effect of the drug. Note that for specifying the hazard matrices, we use the median time to death/progression and use the function `m2r` (also provided in the package) to obtain the hazard rates.
+
+```{r, echo=TRUE, fig.show='hold', fig.width=12.5, warning=FALSE, out.width='100%'}
+times <- c(0, 100, 5 * 365)   # Time interval boundaries, in days
+t_resp <- c(0.2, 0.8) #Proportion of subgroups
+B5 <- pop_pchaz(
+  T = times,
+  lambdaMat1    = m2r(matrix(c(11, 30,
+                               11, 18), byrow = TRUE, nrow = 2)),
+  lambdaMat2    = m2r(matrix(c( 9, 20,
+                                9, 11), byrow = TRUE, nrow = 2)),
+  lambdaProgMat = m2r(matrix(c( 5, 15,
+                                5,  9), byrow = TRUE, nrow = 2)),
+  p = t_resp, discrete_approximation = TRUE
+)
+```
+
+The results object is of class `mixpch`, which has a dedicated plotting function to visualize the survival and hazard functions. 
+
+```{r, echo=TRUE, fig.show='hold', fig.width=6, warning=FALSE, out.width='33%'}
+plot(B5, main = "Survival function")
+plot(B5, fun = "haz", main = "Hazard function")
+plot(B5, fun = "cumhaz", main = "Cumulative Hazard function")
+```
+
+\newpage
+
+## Creating a simulated dataset with sample_fun
+
+The sample_fun function is designed to generate a simulated dataset that would be obtained from a parallel group randomised clinical trial. 
+
+The first step is to create two objects with the (theoretical) survival functions for the treatment and control groups using `pop_pchaz`:
+```{r}
+times <- c(0, 100, 5 * 365)   # Time interval boundaries, in days
+# Treatment group
+B5 <- pop_pchaz(T = times,
+                   lambdaMat1    = m2r(matrix(c(11, 30,
+                                                11, 18), byrow = TRUE, nrow = 2)),
+                   lambdaMat2    = m2r(matrix(c( 9, 20,
+                                                 9, 11), byrow = TRUE, nrow = 2)),
+                   lambdaProgMat = m2r(matrix(c( 5, 15,
+                                                 5,  9), byrow = TRUE, nrow = 2)),
+                   p = c(0.2, 0.8),#Proportion of subgroups
+                discrete_approximation = TRUE 
+)
+# Control group
+K5  <- pop_pchaz(T = times,
+                    lambdaMat1    = m2r(matrix(c(11, 11), nrow = 1)),
+                    lambdaMat2    = m2r(matrix(c( 9,  9), nrow = 1)),
+                    lambdaProgMat = m2r(matrix(c( 5,  5), nrow = 1)),
+                    p = 1, discrete_approximation = TRUE
+)
+```
+
+Then, using the resulting objects, we use them to generate a dataset with the `sample_fun` function: 
+```{r}
+# Study set up and Simulation of a data set until interim analysis at 150 events
+set.seed(15657)
+dat <- sample_fun(K5, B5,
+                  r0 = 0.5,                     # Allocation ratio
+                  eventEnd = 450,               # maximal number of events
+                  lambdaRecr = 300 / 365,       # recruitment rate per day (Poisson assumption)
+                  lambdaCens = 0.013 / 365,     # censoring rate per day  (Exponential assumption)
+                  maxRecrCalendarTime = 3 * 365,# Maximal duration of recruitment
+                  maxCalendar = 4 * 365.25)     # Maximal study duration
+head(dat)
+tail(dat)
+```
+
+
+
+\newpage
+
+## The weighted log-rank test and the max-LRtest
+
+The weighted log-rank test is implemented using the function `logrank.test`, which uses the statistic:
+
+\[
+z = \sum_{t\in\mathcal{D}} w(t)(d_{t, ctr} - e_{t,ctr}) / \sqrt{\sum_{t\in\mathcal{D}} w(t)^2 var(d_{t, ctr})}.
+\]
+
+where $w(t)$ are the Fleming-Harrington $\rho-\gamma$ family weights, such that $w(t)=\widehat{S}(t)^{\rho}(1-\widehat{S}(t))^{\gamma}$.
+Under the the least favorable configuration in $H_0$, the test statistic is asymptotically
+standard normally distributed and large values of $z$ are in favor of the alternative. 
+
+For example, the following code performs the weighted log-rank test using the simulated dataset and $\rho = 1$ and $\gamma = 0$.
+
+```{r}
+logrank.test(time  = dat$y,
+             event = dat$event,
+             group = dat$group,
+             # alternative = "greater",
+             rho   = 1,
+             gamma = 0) 
+# survival::survdiff(formula = survival::Surv(time  = dat$y, event = dat$event) ~ dat$group)
+```
+
+For a set of $k$ different weight functions $w_1(t), \ldots, w_k(t)$, the maximum log-rank test statistic is $z_{max} = \max_{i=1,\ldots,k}z_i$. Under the least favorable
+configuration in $H_0$, approximately $(Z_1, \ldots, Z_k) \sim N_k(0, \Sigma)$.
+The $p$-value of the maximum test, $P_{H_0}(Z_{max} > z_{max})$, is calculated based on this multivariate normal approximation via numeric integration.
+
+The following code performs the maximum log-rank test using four combinations of $\rho$ and $\gamma$ for the weights.
+
+```{r}
+lrmt = logrank.maxtest(
+      time  = dat$y,
+      event = dat$event,
+      group = dat$group,
+      rho   = c(0, 0, 1, 1),
+      gamma = c(0, 1, 0, 1)
+)
+lrmt
+```
+
+The individual tests can also be accesed using the `testListe` elements in the resulting object.
+
+```{r}
+lrmt$logrank.test[[1]]
+lrmt$logrank.test[[2]]
+lrmt$logrank.test[[3]]
+lrmt$logrank.test[[4]]
+```
+

@@ -1,0 +1,107 @@
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 100%;
+  background-color: #2b69aa;
+}
+
+body {
+  color: black;
+}
+
+/*
+ * Home page
+ */
+ .home {
+background-color: #2b69aa;
+color: #f8c954;
+}
+.cover-heading {
+  text-align: center;
+  font-weight: bold;
+  font-size: 54px;
+}
+.cover-text {
+  padding-top: 52px;
+  text-align: center;
+  font-size: 24px;
+}
+.start-button {
+  background-color: #479864;
+  border-color: #479864;
+  color:#4a368c;
+  padding: 12px 12px;
+  border-radius: 5px;
+  font-size: 18px;
+  line-height: 12px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.start-button-div{
+  padding-top: 52px;
+  padding-bottom: 152px;
+  text-align: center;
+  alignment-adjust:center;
+  alignment-baseline:center;
+} 
+.cover-footing {
+  padding-left:  15px;
+  padding-right: 15px;
+  padding-top:   52px;
+  padding-bottom: 152px;
+  background-color: white;
+  font-size: 14px;
+  color: #eb3c96;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.cover-footing-img {
+  padding-top:   15px;
+  padding-left:  15px;
+  padding-right: 15px;
+  background-color: white;
+  font-size: 14px;
+}
+.cover-footing-end {
+  min-height: 20px;
+  background-color: #2b69aa;
+  font-size: 14px;
+}
+
+/*
+ * Nav bar
+ */
+
+.main-header .logo {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.navbar { 
+background-color: #503291;
+font-size: 13px;
+color: #eb3c96; 
+}
+
+.navbar-default .navbar-brand{
+color: #eb3c96;
+}
+.navbar-default .navbar-nav {
+font-weight: 700;
+letter-spacing: 1px;
+text-transform: uppercase;
+} 
+
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:focus, 
+.navbar-default .navbar-nav > .active > a:hover {
+color: white;
+background-color: #261845;
+font-weight: 700;
+letter-spacing: 1px;
+text-transform: uppercase;
+}
