@@ -4,10 +4,16 @@
 \alias{pop_pchaz}
 \title{Calculate survival for piecewise constant hazards with change after random time and mixture of subpopulations}
 \usage{
-pop_pchaz(Tint, lambdaMat1, lambdaMat2, lambdaProgMat, p,
-  timezero = FALSE, int_control = list(rel.tol =
-  .Machine$double.eps^0.4, abs.tol = 1e-09),
-  discrete_approximation = FALSE)
+pop_pchaz(
+  Tint,
+  lambdaMat1,
+  lambdaMat2,
+  lambdaProgMat,
+  p,
+  timezero = FALSE,
+  int_control = list(rel.tol = .Machine$double.eps^0.4, abs.tol = 1e-09),
+  discrete_approximation = FALSE
+)
 }
 \arguments{
 \item{Tint}{vector of length \eqn{k+1}, for the boundaries of \eqn{k} time intervals (presumably in days) with piecewise constant hazard. The boundaries should be increasing and the first one should

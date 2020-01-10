@@ -445,7 +445,7 @@ pop_pchaz <- function(Tint, lambdaMat1, lambdaMat2, lambdaProgMat, p, timezero=F
   if (length(p) != nrow(as.matrix(lambdaMat1))){
     stop("The length of p should be equal to the number of column of the lambda matrices")
   }  
-  if (sum(p) != 1){
+  if (abs(sum(p)-1)>.Machine$double.eps^.5){
     stop("The prevalences in p should sum up to 1")
   }  
   if (length(timezero) == 1){

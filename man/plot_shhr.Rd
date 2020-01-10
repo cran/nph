@@ -4,8 +4,7 @@
 \alias{plot_shhr}
 \title{Plot of survival, hazard and hazard ratio of two groups as a function of time}
 \usage{
-plot_shhr(A, B, main = "", xmax = NULL, ymax_haz = NULL,
-  ymax_hr = NULL)
+plot_shhr(A, B, main = "", xmax = NULL, ymax_haz = NULL, ymax_hr = NULL)
 }
 \arguments{
 \item{A}{An object of class \code{mixpch}, resembling the survival function in treatment group 0}

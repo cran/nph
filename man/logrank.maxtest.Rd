@@ -5,8 +5,15 @@
 \alias{print.wlogrank_max}
 \title{Maximum log-rank test}
 \usage{
-logrank.maxtest(time, event, group, alternative = c("two.sided", "less",
-  "greater"), rho = c(0, 0, 1), gamma = c(0, 1, 0), weights = NULL)
+logrank.maxtest(
+  time,
+  event,
+  group,
+  alternative = c("two.sided", "less", "greater"),
+  rho = c(0, 0, 1),
+  gamma = c(0, 1, 0),
+  weights = NULL
+)
 }
 \arguments{
 \item{time}{Vector of observed event/censored times}

@@ -4,8 +4,14 @@
 \alias{plot.mixpch}
 \title{Plot mixpch Objects}
 \usage{
-\method{plot}{mixpch}(x, fun = c("S", "F", "haz", "cumhaz"),
-  add = FALSE, ylab = fun, xlab = "Time", ...)
+\method{plot}{mixpch}(
+  x,
+  fun = c("S", "F", "haz", "cumhaz"),
+  add = FALSE,
+  ylab = fun,
+  xlab = "Time",
+  ...
+)
 }
 \arguments{
 \item{x}{an object of class \code{mixpch}.}

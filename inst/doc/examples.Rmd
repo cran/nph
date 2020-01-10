@@ -1,7 +1,7 @@
 ---
 title: |
  | nph Examples: Delayed treatment effects, treatment switches and heterogeneous patient populations: how to design and analyse RCTs in oncology
-author: "Robin Ristl, Nicolás Ballarini, Heiko Götte, Armin Schüler, Martin Posch, Franz König"
+author: "Robin Ristl, Nicolas Ballarini, Heiko Goette, Armin Schueler, Martin Posch, Franz Koenig"
 date: "`r Sys.Date()`"
 output: 
   html_document:

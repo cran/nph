@@ -4,8 +4,17 @@
 \alias{sample_conditional_fun}
 \title{Draw conditional survival times based on study settings}
 \usage{
-sample_conditional_fun(dat, A, B, r0 = 0.5, eventEnd, lambdaRecr,
-  lambdaCens, maxRecrCalendarTime, maxCalendar)
+sample_conditional_fun(
+  dat,
+  A,
+  B,
+  r0 = 0.5,
+  eventEnd,
+  lambdaRecr,
+  lambdaCens,
+  maxRecrCalendarTime,
+  maxCalendar
+)
 }
 \arguments{
 \item{dat}{A data frame with the same structure and column names as the output of \code{\link{sample_fun}}, containing the data to condition on}

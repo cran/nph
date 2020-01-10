@@ -4,8 +4,14 @@
 \alias{plot_subgroups}
 \title{Draw a population composition plot}
 \usage{
-plot_subgroups(A, B, colors = "default", max_time = max(A$Tint),
-  position = c("stack", "fill"), title = "")
+plot_subgroups(
+  A,
+  B,
+  colors = "default",
+  max_time = max(A$Tint),
+  position = c("stack", "fill"),
+  title = ""
+)
 }
 \arguments{
 \item{A}{An object of class \code{mixpch}, resembling the survival function in treatment group 0}

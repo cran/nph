@@ -1,7 +1,7 @@
 Package: nph
 Title: Planning and Analysing Survival Studies under Non-Proportional
         Hazards
-Version: 1.9
+Version: 2.0
 Authors@R: c(
   person("Robin", "Ristl", email = "robin.ristl@meduniwien.ac.at", role = c("aut", "cre")),
   person("Nicolas", "Ballarini", email = "nicolas.ballarini@meduniwien.ac.at", role = c("ctb")))
@@ -10,19 +10,19 @@ Description: Piecewise constant hazard functions are used to flexibly model surv
 	comparison of two hazard functions is included. Finally, a function to calculate a test using the maximum of a set of 
 	test statistics from weighted log-rank tests is provided. This test utilizes the asymptotic multivariate normal joint distribution
 	of the separate test statistics. The correlation is estimated from the data.
-Date: 2019-08-21
+Date: 2020-01-08
 Maintainer: Robin Ristl <robin.ristl@meduniwien.ac.at>
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0
+RoxygenNote: 7.0.2
 NeedsCompilation: no
 Depends: R (>= 3.3.0)
 Imports: stats, graphics, mvtnorm, ggplot2
 Suggests: knitr, shiny, shinycssloaders, formatR, styler, rmarkdown
 VignetteBuilder: knitr
-Packaged: 2019-08-22 07:26:05 UTC; Robin
+Packaged: 2020-01-08 10:26:27 UTC; Robin
 Author: Robin Ristl [aut, cre],
   Nicolas Ballarini [ctb]
 Repository: CRAN
-Date/Publication: 2019-08-23 10:50:02 UTC
+Date/Publication: 2020-01-10 16:50:02 UTC

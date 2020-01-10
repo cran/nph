@@ -4,8 +4,16 @@
 \alias{sample_fun}
 \title{Draw survival times based on study settings}
 \usage{
-sample_fun(A, B, r0 = 0.5, eventEnd, lambdaRecr, lambdaCens,
-  maxRecrCalendarTime, maxCalendar)
+sample_fun(
+  A,
+  B,
+  r0 = 0.5,
+  eventEnd,
+  lambdaRecr,
+  lambdaCens,
+  maxRecrCalendarTime,
+  maxCalendar
+)
 }
 \arguments{
 \item{A}{An object of class \code{mixpch}, resembling the survival function in treatment group 0}

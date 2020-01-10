@@ -1,6 +1,6 @@
-﻿---
+---
 title: "Introduction to nph and Usage Instructions"
-author: "Robin Ristl, Nicolás Ballarini"
+author: "Robin Ristl, Nicolas Ballarini"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >

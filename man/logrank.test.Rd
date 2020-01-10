@@ -5,8 +5,15 @@
 \alias{print.wlogrank}
 \title{Weighted log-rank test}
 \usage{
-logrank.test(time, event, group, alternative = c("two.sided", "less",
-  "greater"), rho = 0, gamma = 0, weights = NULL)
+logrank.test(
+  time,
+  event,
+  group,
+  alternative = c("two.sided", "less", "greater"),
+  rho = 0,
+  gamma = 0,
+  weights = NULL
+)
 }
 \arguments{
 \item{time}{Vector of observed event/censored times}

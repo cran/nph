@@ -4,10 +4,16 @@
 \alias{plot_diagram}
 \title{Draw a state space figure}
 \usage{
-plot_diagram(A, B, A_subgr_labels = "", B_subgr_labels = "",
+plot_diagram(
+  A,
+  B,
+  A_subgr_labels = "",
+  B_subgr_labels = "",
   which = c("Both", "Experimental", "Control"),
-  treatment_labels = c("Experimental", "Control"), colors = "default",
-  show.rate = TRUE)
+  treatment_labels = c("Experimental", "Control"),
+  colors = "default",
+  show.rate = TRUE
+)
 }
 \arguments{
 \item{A}{An object of class \code{mixpch}, resembling the survival function in treatment group 0}
