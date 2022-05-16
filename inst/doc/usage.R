@@ -1,10 +1,10 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 
-## ----eval=FALSE, fig.show='hold'-----------------------------------------
+## ----eval=FALSE, fig.show='hold'----------------------------------------------
 #  install.packages("nph")
 #  
 #  # For dev version
@@ -143,7 +143,7 @@ plot(B5, main = "Survival function")
 plot(B5, fun = "haz", main = "Hazard function")
 plot(B5, fun = "cumhaz", main = "Cumulative Hazard function")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 times <- c(0, 100, 5 * 365)   # Time interval boundaries, in days
 # Treatment group
 B5 <- pop_pchaz(T = times,
@@ -164,7 +164,7 @@ K5  <- pop_pchaz(T = times,
                     p = 1, discrete_approximation = TRUE
 )
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Study set up and Simulation of a data set until interim analysis at 150 events
 set.seed(15657)
 dat <- sample_fun(K5, B5,
@@ -177,7 +177,7 @@ dat <- sample_fun(K5, B5,
 head(dat)
 tail(dat)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 logrank.test(time  = dat$y,
              event = dat$event,
              group = dat$group,
@@ -186,7 +186,7 @@ logrank.test(time  = dat$y,
              gamma = 0) 
 # survival::survdiff(formula = survival::Surv(time  = dat$y, event = dat$event) ~ dat$group)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 lrmt = logrank.maxtest(
       time  = dat$y,
       event = dat$event,
@@ -196,7 +196,7 @@ lrmt = logrank.maxtest(
 )
 lrmt
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 lrmt$logrank.test[[1]]
 lrmt$logrank.test[[2]]
 lrmt$logrank.test[[3]]

@@ -132,6 +132,9 @@ internal_pchaz <- function(Tint, lambda){
 #' 
 #' @author Robin Ristl, \email{robin.ristl@@meduniwien.ac.at}, Nicolas Ballarini
 #' @seealso \code{\link{subpop_pchaz}}, \code{\link{pop_pchaz}}, \code{\link{plot.mixpch}}
+#' @references
+#' Robin Ristl, Nicolas Ballarini, Heiko Götte, Armin Schüler, Martin Posch, Franz König. Delayed treatment effects, treatment switching and 
+#' heterogeneous patient populations: How to design and analyze RCTs in oncology. Pharmaceutical statistics. 2021; 20(1):129-145.
 #' @examples
 #' pchaz(Tint = c(0, 40, 100), lambda=c(.02, .05))
 #Das heiszt ab inklusive Tag 0 gilt lambda=0.02, ab inklusive Tag 40 gilt lambda 0.05
@@ -308,6 +311,9 @@ internal_subpop_pchaz<-function(Tint, lambda1, lambda2, lambdaProg, timezero = F
 #' }
 #' @author Robin Ristl, \email{robin.ristl@@meduniwien.ac.at}, Nicolas Ballarini
 #' @seealso \code{\link{pchaz}}, \code{\link{pop_pchaz}}, \code{\link{plot.mixpch}}
+#' @references
+#' Robin Ristl, Nicolas Ballarini, Heiko Götte, Armin Schüler, Martin Posch, Franz König. Delayed treatment effects, treatment switching and 
+#' heterogeneous patient populations: How to design and analyze RCTs in oncology. Pharmaceutical statistics. 2021; 20(1):129-145.
 #' @examples
 #' subpop_pchaz(Tint = c(0, 40, 100), lambda1 = c(0.2, 0.4), lambda2 = c(0.1, 0.01),
 #'	lambdaProg = c(0.5, 0.4),timezero = FALSE, discrete_approximation = TRUE)
@@ -414,6 +420,9 @@ subpop_pchaz<-function(Tint, lambda1, lambda2, lambdaProg, timezero = FALSE,
 #' }
 #' @author Robin Ristl, \email{robin.ristl@@meduniwien.ac.at}, Nicolas Ballarini
 #' @seealso \code{\link{pchaz}}, \code{\link{subpop_pchaz}}, \code{\link{plot.mixpch}}
+#' @references
+#' Robin Ristl, Nicolas Ballarini, Heiko Götte, Armin Schüler, Martin Posch, Franz König. Delayed treatment effects, treatment switching and 
+#' heterogeneous patient populations: How to design and analyze RCTs in oncology. Pharmaceutical statistics. 2021; 20(1):129-145.
 #' @examples
 #' pop_pchaz(Tint = c(0, 40, 100),
 #'   lambdaMat1 = matrix(c(0.2, 0.1, 0.4, 0.1), 2, 2),

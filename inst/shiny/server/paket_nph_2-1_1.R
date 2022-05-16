@@ -1,4 +1,4 @@
-#R Paket MERCK Survival non-proportional hazards
+#R Paket Survival non-proportional hazards
 
 # @title Calculate survival for piecewise constant hazard
 #
@@ -22,7 +22,7 @@
 # @seealso \code{\link{subpop_hazVFfun}}, \code{\link{pop_hazVFfun}}, \code{\link{plot.mixpch}}
 # @examples
 # hazVFfun(Tint=c(0,40,100),lambda=c(.02,.05))
-#Das heiszt ab inklusive Tag 0 gilt lambda=0.02, ab inklusive Tag 40 gilt lambda 0.05
+#Das heißt ab inklusive Tag 0 gilt lambda=0.02, ab inklusive Tag 40 gilt lambda 0.05
 #Wenn das Event am Tag 40 mit dem Hazard 0.05 eintritt, wird es am Tag 41 registriert.
 hazVFfun<-function(Tint,lambda) {
   if (length(Tint) != (length(lambda) + 1)) {
@@ -274,6 +274,10 @@ pop_hazVFfun<-function(Tint,lambdaMat1,lambdaMat2,lambdaProgMat,p,timezero=TRUE)
 #' 
 #' @seealso \code{\link{pchaz}}, \code{\link{subpop_pchaz}}, \code{\link{pop_pchaz}}
 #' 
+#' @references
+#' Robin Ristl, Nicolas Ballarini, Heiko Götte, Armin Schüler, Martin Posch, Franz König. Delayed treatment effects, treatment switching and 
+#' heterogeneous patient populations: How to design and analyze RCTs in oncology. Pharmaceutical statistics. 2021; 20(1):129-145. 
+#'
 #' @examples
 #' A <- pop_pchaz(Tint = c(0, 90, 1500),
 #'   lambdaMat1 = matrix(c(0.2, 0.1, 0.4, 0.1), 2, 2) / 365,
@@ -306,6 +310,10 @@ plot.mixpch<-function(x,fun=c("S","F","haz","cumhaz"),add=FALSE,ylab=fun,xlab="T
 #'
 #' @author Robin Ristl, \email{robin.ristl@@meduniwien.ac.at}
 #' 
+#' @references
+#' Robin Ristl, Nicolas Ballarini, Heiko Götte, Armin Schüler, Martin Posch, Franz König. Delayed treatment effects, treatment switching and 
+#' heterogeneous patient populations: How to design and analyze RCTs in oncology. Pharmaceutical statistics. 2021; 20(1):129-145. 
+#'
 #' @seealso \code{\link{rSurv_conditional_fun}}, \code{\link{sample_fun}}, \code{\link{sample_conditional_fun}}
 #' 
 #' @examples
@@ -348,6 +356,11 @@ rSurv_fun<-function(n,x) {
 #' 	Note that the mixpch object stores the survival function up to some time T. For random times equal or larger T, the value T is returned.
 #' @author Robin Ristl, \email{robin.ristl@@meduniwien.ac.at}
 #' @seealso \code{\link{rSurv_fun}}, \code{\link{sample_fun}}, \code{\link{sample_conditional_fun}}
+#'
+#' @references
+#' Robin Ristl, Nicolas Ballarini, Heiko Götte, Armin Schüler, Martin Posch, Franz König. Delayed treatment effects, treatment switching and 
+#' heterogeneous patient populations: How to design and analyze RCTs in oncology. Pharmaceutical statistics. 2021; 20(1):129-145. 
+#'
 #' @examples
 #' A <- pop_pchaz(Tint = c(0, 90, 1500),
 #'   lambdaMat1 = matrix(c(0.2, 0.1, 0.4, 0.1), 2, 2) / 365,
@@ -416,6 +429,11 @@ rSurv_conditional_fun<-function(x,y) {
 #' @details For simulating the data, patients are allocated randomly to either group (unrestricted randomization).
 #' @author Robin Ristl, \email{robin.ristl@@meduniwien.ac.at}
 #' @seealso \code{\link{rSurv_fun}}, \code{\link{rSurv_conditional_fun}}, \code{\link{sample_conditional_fun}}
+#'
+#' @references
+#' Robin Ristl, Nicolas Ballarini, Heiko Götte, Armin Schüler, Martin Posch, Franz König. Delayed treatment effects, treatment switching and 
+#' heterogeneous patient populations: How to design and analyze RCTs in oncology. Pharmaceutical statistics. 2021; 20(1):129-145. 
+#'
 #' @examples
 #' A <- pop_pchaz(Tint = c(0, 90, 1500),
 #'   lambdaMat1 = matrix(c(0.2, 0.1, 0.4, 0.1), 2, 2) / 365,
@@ -557,6 +575,12 @@ sample_fun<-function(A,B,r0=0.5,eventEnd,lambdaRecr,lambdaCens,maxRecrCalendarTi
 #' @details For simulating the data, patients are allocated randomly to either group (unrestricted randomization).
 #' @author Robin Ristl, \email{robin.ristl@@meduniwien.ac.at}
 #' @seealso \code{\link{rSurv_fun}}, \code{\link{rSurv_conditional_fun}}, \code{\link{sample_fun}}
+#'
+#' @references
+#' Robin Ristl, Nicolas Ballarini, Heiko Götte, Armin Schüler, Martin Posch, Franz König. Delayed treatment effects, treatment switching and 
+#' heterogeneous patient populations: How to design and analyze RCTs in oncology. Pharmaceutical statistics. 2021; 20(1):129-145. 
+#'
+#'
 #' @examples
 #' A <- pop_pchaz(Tint = c(0, 90, 1500),
 #'   lambdaMat1 = matrix(c(0.2, 0.1, 0.4, 0.1), 2, 2) / 365,
@@ -668,7 +692,7 @@ sample_conditional_fun<-function(dat,A,B,r0=0.5,eventEnd,lambdaRecr,lambdaCens,m
 #' @description Calculates a weighted log-rank test for the comparison of two groups.
 #' 
 #' @param time Vector of observed event/censored times
-#' @param event logical vector indicating if an event was observed (TRUE) or the time is censored (FALSE)
+#' @param event logical vector or numeric vector with entries 0 or 1, indicating if an event was observed (TRUE or 1) or the time is censored (FALSE or 0)
 #' @param group Vector of group allocations
 #' @param alternative Either of \code{"two.sided"},\code{"less"} or \code{"greater"}, specifies if two-sided or respective
 #'	one-sided p-values are calculated. In any case the z test statistic of each included weighted log-rank test 
@@ -677,7 +701,8 @@ sample_conditional_fun<-function(dat,A,B,r0=0.5,eventEnd,lambdaRecr,lambdaCens,m
 #'	lower (weighted average) hazard rate in the first group.
 #' @param rho Parameter to calculate weights in the rho-gamma family
 #' @param gamma Parameter to calculate weights in the rho-gamma family
-#' @param weights Optional vector of weights
+#' @param event_time_weights Optional vector of user defined weights. This weight vector needs to have one entry per event time (not per event, as multiple events may
+#'	occur at the same time) and must be sorted by increasing event time.
 #' 
 #' @return A list with elements:
 #' \describe{
@@ -708,9 +733,11 @@ sample_conditional_fun<-function(dat,A,B,r0=0.5,eventEnd,lambdaRecr,lambdaCens,m
 #' values of \eqn{z} are in favor of the alternative.
 #' 
 #' The function consider particular weights in the Fleming-Harrington \eqn{\rho-\gamma} 
-#' family \eqn{w(t)=\hat S(t)^\rho (1-\hat S(t))^\gamma}. 
+#' family \eqn{w(t)=\hat S(t-)^\rho (1-\hat S(t-))^\gamma}. 
 #' Here, \eqn{\hat{S}(t)=\prod_{s \in \mathcal{D}: s \leq t} 1-\frac{d_{t,ctr}+d_{t,trt}}{n_{t,ctr}+n_{t,trt}}}
-#' is the pooled sample Kaplan-Meier estimator. 
+#' is the pooled sample Kaplan-Meier estimator.
+#' (Note: Prior to package version 2.1, \eqn{S(t)} was used in the definition of \eqn{\rho-\gamma} weights,
+#' this was changed to \eqn{S(t-)} with version 2.1.)
 #' Weights \eqn{\rho=0, \gamma=0} correspond to the standard logrank test with 
 #' constant weights \eqn{w(t)=1}. Choosing \eqn{\rho=0, \gamma=1} puts more weight on 
 #' late events, \eqn{\rho=1, \gamma=0} puts more weight on early events and 
@@ -720,8 +747,11 @@ sample_conditional_fun<-function(dat,A,B,r0=0.5,eventEnd,lambdaRecr,lambdaCens,m
 #' @seealso \code{\link{logrank.maxtest}}
 #' 
 #' @references 
-#' Thomas R Fleming and David P Harrington.Counting processes and survival anal-ysis, volume 169.  John Wiley & Sons, 2011
-#' 
+#' Robin Ristl, Nicolas Ballarini, Heiko Götte, Armin Schüler, Martin Posch, Franz König. Delayed treatment effects, treatment switching and 
+#' heterogeneous patient populations: How to design and analyze RCTs in oncology. Pharmaceutical statistics. 2021; 20(1):129-145. 
+#'
+#' Thomas R Fleming and David P Harrington. Counting processes and survival analysis. John Wiley & Sons, 2011
+#'
 #' @examples
 #' A <- pop_pchaz(Tint = c(0, 90, 1500),
 #'   lambdaMat1 = matrix(c(0.2, 0.1, 0.4, 0.1), 2, 2) / 365,
@@ -745,7 +775,7 @@ sample_conditional_fun<-function(dat,A,B,r0=0.5,eventEnd,lambdaRecr,lambdaCens,m
 #' @import stats
 #' @export
 logrank.test<-function(time,event,group,alternative=c("two.sided", "less", "greater"),
-                       rho=0,gamma=0,weights=NULL) {
+                       rho=0,gamma=0,event_time_weights=NULL) {
   call <- match.call()
   alternative = match.arg(alternative)
   n<-length(time)
@@ -804,9 +834,19 @@ logrank.test<-function(time,event,group,alternative=c("two.sided", "less", "grea
   D$var<-D$atrisk1*D$event*D$atrisk2*(D$atrisk-D$event)/( D$atrisk^2*(D$atrisk-1) )
   
   D$S<-	cumprod((D$atrisk-D$event)/D$atrisk) #Kaplan-Meier estimator
-  
+  D$Sminus<-c(1,D$S[-length(D$S)])
+
   #wenn weights bereitgestellt werden:
-  if(is.null(weights)) D$w<-D$S^rho*(1-D$S)^gamma else D$w<-weights[D$time+1] #+1, denn Zeiten starten im weights Vektor mit t=0
+  if (is.null(event_time_weights)) {
+	#rho-gamma weights now use S(t-) instead of S(t)
+	D$w <- D$Sminus^rho * (1 - D$Sminus)^gamma 
+  } else {
+	#user defined weights now need one entry per event time, sorted by event time
+	D$w <- event_time_weights/sum(event_time_weights)
+	rho<-NA
+	gamma<-NA
+  }
+  #if(is.null(weights)) D$w<-D$S^rho*(1-D$S)^gamma else D$w<-weights[D$time+1] #+1, denn Zeiten starten im weights Vektor mit t=0
   #weights muss Gewichte fuer alle Zeiten t=0,1,... bis zur maximalen Eventzeit enthalten
   #D$w<-D$S^rho*(1-D$S)^gamma
   #D
@@ -826,7 +866,7 @@ logrank.test<-function(time,event,group,alternative=c("two.sided", "less", "grea
   out = list(D=D,test=data.frame(rho,gamma,z,Chisq,df,p,alternative),var=sum(D$w^2*D$var),
              obs = c(sum(D$event1), sum(D$event2)),
              exp = c(sum(D$expected1), sum(D$expected2)),
-             n   = c(sum(D$atrisk1[1]), sum(D$atrisk2[1])),
+             n   =  as.numeric(ng),
              call = call)
   class(out) = "wlogrank"
   out
@@ -836,14 +876,14 @@ logrank.test<-function(time,event,group,alternative=c("two.sided", "less", "grea
 ###
 
 
-#' @title Maximum log-rank test
+#' @title Maximum combination (MaxCombo) log-rank test
 #'
 #' @aliases logrank.maxtest print.wlogrank_max
 #' 
-#' @description Calculates a test for the comparison of two groups based on the maximum of test statistics of a set of weighted log-rank tests
+#' @description Calculates a MaxCombo test for the comparison of two groups based on the maximum of test statistics of a set of weighted log-rank tests
 #' 
 #' @param time Vector of observed event/censored times
-#' @param event logical vector indicating if an event was observed (TRUE) or the time is censored (FALSE)
+#' @param event logical vector or numeric vector with entries 0 or 1, indicating if an event was observed (TRUE or 1) or the time is censored (FALSE or 0)
 #' @param group Vector of group allocations
 #' @param alternative Either of \code{"two.sided"},\code{"less"} or \code{"greater"}, specifies if two-sided or respective
 #'	one-sided p-values are calculated. In any case the z test statistic of each included weighted log-rank test 
@@ -852,7 +892,10 @@ logrank.test<-function(time,event,group,alternative=c("two.sided", "less", "grea
 #'	lower (weighted average) hazard rate in the first group.
 #' @param rho Vector of parameter values rho for a set of weighting functions in the rho-gamma family
 #' @param gamma Vector of parameter values gamma for a set of weighting functions in the rho-gamma family
-#' @param weights Optional matrix, each column containing a different weighting vector for the data
+#' @param event_time_weights Optional matrix, each column containing a different weighting vector for the event times.
+#' 	These weight vectors need to have one entry per event time (not per event, as multiple events may
+#'	occur at the same time) and must be sorted by increasing event time.
+#' @param algorithm algorithm for the multivariate normal integration to be used in \code{\link[mvtnorm]{pmvnorm}}.
 #' 
 #' @return A list with elements:
 #' \describe{
@@ -875,19 +918,37 @@ logrank.test<-function(time,event,group,alternative=c("two.sided", "less", "grea
 #' \eqn{(Z_1,\dots,Z_m)\sim N_m({0},{\Sigma})}. The p-value of the maximum 
 #' test, \eqn{P_{H_0}(Z_{max}>z_{max})=1-P(Z_1 \leq z_{max},\dots,Z_m \leq z_{max})},
 #' is calculated based on this multivariate normal approximation via numeric integration.
+#' The integration is done using \code{\link[mvtnorm]{pmvnorm}}. The default settings in
+#' \code{logrank.maxtest} correspond to greater precision than the original default of
+#' \code{\link[mvtnorm]{pmvnorm}}. Precision can be set via the argument \code{algorithm}.
+#' Lower precision settings may speed up caclulation.
 #' 
-#' This approach automatically corrects for multiple testing with different 
-#' weights and does so efficiently since the correlation between the different 
+#' The multivariate normal approach automatically corrects for multiple testing with
+#' different weights and does so efficiently since the correlation between the different 
 #' tests is incorporated in \eqn{{\Sigma}}. For actual calculations, \eqn{{\Sigma}} is
 #'  replaced by an estimate.
-#'  Note that \eqn{cov (w_i(t)d_{t,ctr},w_j(t)d_{t,ctr})=w_i(t)w_j(t) var(d_{t,ctr})},
-#'  at least approximately assuming weights are converging in probability to 
-#'  a non-random function. Thus the \eqn{i,j}-the element of \eqn{{\Sigma}} is estimated as
-#'  \deqn{\hat{cov}(Z_i,Z_j)=\sum_{t \in \mathcal{D}}  w_i(t)w_j(t)var(d_{t,ctr})/ \sqrt{\sum_{t \in \mathcal{D}}  w_i^2(t) var(d_{t,ctr})   \sum_{t \in \mathcal{D}} w_j^2(t) var(d_{t,ctr})}}
+#  Note that \eqn{cov (w_i(t)d_{t,ctr},w_j(t)d_{t,ctr})=w_i(t)w_j(t) var(d_{t,ctr})},
+#  at least approximately assuming weights are converging in probability to 
+#  a non-random function. Thus the \eqn{i,j}-the element of \eqn{{\Sigma}} is estimated as
+#  \deqn{\hat{cov}(Z_i,Z_j)=\sum_{t \in \mathcal{D}}  w_i(t)w_j(t)var(d_{t,ctr})/ \sqrt{\sum_{t \in \mathcal{D}}  w_i^2(t) var(d_{t,ctr})   \sum_{t \in \mathcal{D}} w_j^2(t) var(d_{t,ctr})}}
 #'  
 #' 
 #' @author Robin Ristl, \email{robin.ristl@@meduniwien.ac.at}
 #' @seealso \code{\link{logrank.test}}
+#'
+#' @references
+#' Robin Ristl, Nicolas Ballarini, Heiko Götte, Armin Schüler, Martin Posch, Franz König. Delayed treatment effects, treatment switching and 
+#' heterogeneous patient populations: How to design and analyze RCTs in oncology. Pharmaceutical statistics. 2021; 20(1):129-145. 
+#'
+#' Pranab Ghosh, Robin Ristl, Franz König, Martin Posch, Christopher Jennison, Heiko Götte, Armin Schüler, Cyrus Mehta. Robust group sequential
+#' designs for trials with survival endpoints and delayed response. Biometrical Journal. First published online: 21 December 2021
+#'
+#' Tarone RE. On the distribution of the maximum of the logrank statistic and the modified wilcoxon statistic. Biometrics. 1981; 37:79-85.
+#'
+#' Lee S-H. On the versatility of the combination of the weighted log-rank statistics. Comput Stat Data Anal. 2007; 51(12):6557-6564. 
+#'
+#' Karrison TG et al. Versatile tests for comparing survival curves based on weighted log-rank statistics. Stata J. 2016; 16(3):678-690. 
+#'
 #' @examples
 #' A <- pop_pchaz(Tint = c(0, 90, 1500),
 #'   lambdaMat1 = matrix(c(0.2, 0.1, 0.4, 0.1), 2, 2) / 365,
@@ -910,14 +971,14 @@ logrank.test<-function(time,event,group,alternative=c("two.sided", "less", "grea
 #' @importFrom mvtnorm pmvnorm
 #' @export
 logrank.maxtest<-function(time,event,group,alternative=c("two.sided", "less","greater"),
-                          rho=c(0,0,1),gamma=c(0,1,0),weights=NULL) {  #weights ist Matrix, pro Spalte ein Gewichtsvektor
+                          rho=c(0,0,1),gamma=c(0,1,0),event_time_weights=NULL,algorithm = mvtnorm::GenzBretz(maxpts = 50000, abseps = 0.00001, releps = 0)) {  #event_time_weights ist Matrix, pro Spalte ein Gewichtsvektor
   #require(mvtnorm) #das muss fuer das Paket aus der Funktion in die namespace datei verschoben werden.
   call <- match.call()
   alternative = match.arg(alternative)
   if(!is.null(rho))	mrg<-length(rho) else mrg<-0
-  if(!is.null(weights)) {
-    if(!is.matrix(weights)) weights<-matrix(weights,ncol=1)
-    mw<-dim(weights)[2]
+  if(!is.null(event_time_weights)) {
+    if(!is.matrix(event_time_weights)) event_time_weights<-matrix(event_time_weights,ncol=1)
+    mw<-dim(event_time_weights)[2]
   } else {
     mw<-0
   }
@@ -928,7 +989,7 @@ logrank.maxtest<-function(time,event,group,alternative=c("two.sided", "less","gr
   p<-rep(0,m)
   for(i in 1:m) {
     if(i<=mrg) testListe[[i]]<-logrank.test(time=time,event=event,group=group,alternative=alternative,rho=rho[i],gamma=gamma[i])
-    if(i>mrg) testListe[[i]]<-logrank.test(time=time,event=event,group=group,alternative=alternative,weights=weights[,i-mrg])
+    if(i>mrg) testListe[[i]]<-logrank.test(time=time,event=event,group=group,alternative=alternative,event_time_weights=event_time_weights[,i-mrg])
     z[i]<-testListe[[i]]$test$z
     p[i]<-testListe[[i]]$test$p
   }
@@ -946,20 +1007,20 @@ logrank.maxtest<-function(time,event,group,alternative=c("two.sided", "less","gr
     maxz<-max(abs(z))
     low=-rep(maxz,m)
     up=rep(maxz,m)
-    pmult<-1-mvtnorm::pmvnorm(lower=low,upper=up,corr=V)
+    pmult<-1-mvtnorm::pmvnorm(lower=low,upper=up,corr=V,algorithm=algorithm)
   }
   
   if(alternative=="less") {
     minz<-min(z)
     low=rep(minz,m)
     up=rep(Inf,m)
-    pmult<-1-mvtnorm::pmvnorm(lower=low,upper=up,corr=V)
+    pmult<-1-mvtnorm::pmvnorm(lower=low,upper=up,corr=V,algorithm=algorithm)
   }
   if(alternative=="greater") {
     maxz<-max(z)
     low=rep(-Inf,m)
     up=rep(maxz,m)
-    pmult<-1-mvtnorm::pmvnorm(lower=low,upper=up,corr=V)
+    pmult<-1-mvtnorm::pmvnorm(lower=low,upper=up,corr=V,algorithm=algorithm)
   }
   
   #pmult
@@ -973,3 +1034,5 @@ logrank.maxtest<-function(time,event,group,alternative=c("two.sided", "less","gr
   class(out) = "wlogrank_max"
   out
 }
+
+

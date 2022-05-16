@@ -79,16 +79,16 @@ plot_diagram = function(A,
   t_lambdas = data.frame()
   for (i in 1:length(t_pr)){
     t_lambdas = rbind(t_lambdas,
-                      t_lambdaMat1[i,],
+                      t_lambdaProgMat[i,],
                       t_lambdaMat2[i,],
-                      t_lambdaProgMat[i,])
+                      t_lambdaMat1[i,])
   }
   c_lambdas = data.frame()
   for (i in 1:length(c_pr)){
     c_lambdas = rbind(c_lambdas,
-                      c_lambdaMat1[i,],
+                      c_lambdaProgMat[i,],
                       c_lambdaMat2[i,],
-                      c_lambdaProgMat[i,])
+                      c_lambdaMat1[i,])
   }
   colnames(t_lambdas) = colnames(c_lambdas) = paste0("T", 1:(length(times)-1))
   dat = cbind(dat, rbind(t_lambdas, c_lambdas))
@@ -299,23 +299,25 @@ nph_gui <- function(){
 #' 
 #' @author Robin Ristl, \email{robin.ristl@@meduniwien.ac.at}, Nicolas Ballarini
 #' @seealso \code{\link{pop_pchaz}}
+#' @references
+#' Robin Ristl, Nicolas Ballarini, Heiko Götte, Armin Schüler, Martin Posch, Franz König. Delayed treatment effects, treatment switching and 
+#' heterogeneous patient populations: How to design and analyze RCTs in oncology. Pharmaceutical statistics. 2021; 20(1):129-145.
 #' @examples
-#' A <- pop_pchaz(Tint = c(0, 90, 1500),
+#' A <- pop_pchaz(Tint = c(0, 90, 365),
 #'   lambdaMat1 = matrix(c(0.2, 0.1, 0.4, 0.1), 2, 2) / 365,
 #'	 lambdaMat2 = matrix(c(0.5, 0.2, 0.6, 0.2), 2, 2) / 365,
 #'	 lambdaProg = matrix(c(0.5, 0.5, 0.4, 0.4), 2, 2) / 365,
 #'	 p = c(0.8, 0.2), 
 #'	 timezero = FALSE, discrete_approximation = TRUE)
-#' B <- pop_pchaz(Tint = c(0, 90, 1500),
+#' B <- pop_pchaz(Tint = c(0, 90, 365),
 #'   lambdaMat1 = matrix(c(0.2, 0.1, 0.4, 0.1), 2, 2) / 365,
 #'	 lambdaMat2 = matrix(c(0.5, 0.1, 0.6, 0.1), 2, 2) / 365,
 #'	 lambdaProg = matrix(c(0.5, 0.5, 0.04, 0.04), 2, 2) / 365,
 #'	 p = c(0.8, 0.2), 
 #'	 timezero = FALSE, discrete_approximation = TRUE)
 #' plot_subgroups(A, B, title = "position='stack'")
-#' \donttest{
 #' plot_subgroups(A, B, position='fill', title = "position='fill'")
-#' }
+#'
 #'
 #' @import ggplot2
 #' @export

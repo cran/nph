@@ -1,11 +1,11 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(cache = FALSE,
   collapse = TRUE,
   comment = "#>"
 )
 options()
 
-## ----fig.show='hold'-----------------------------------------------------
+## ----fig.show='hold'----------------------------------------------------------
 library(nph)
 
 ## ----001, fig.show='hold', fig.width=12.5, warning=FALSE, out.width='100%'----
@@ -73,7 +73,7 @@ pp
 ## ----fig.show='hold', fig.height=3.5, fig.width=10, warning=FALSE, out.width='100%'----
 plot_shhr(K5, B5)
 
-## ----003,  fig.show='hold', fig.width=11, warning=FALSE, out.width='100%'----
+## ----003,  fig.show='hold', fig.width=11, warning=FALSE, out.width='100%'-----
 times <- c(0, 5 * 365)   # Time interval boundaries, in days
 
 # Treatment group

@@ -1,0 +1,19 @@
+citEntry(entry="Article",
+  title = "Delayed treatment effects, treatment switching and heterogeneous patient populations: How to design and analyze RCTs in oncology",
+  author = personList(
+    as.person("Robin Ristl"),
+    as.person("Nicolas Ballarini"),
+    as.person("Heiko G{\\\"o}tte"),
+    as.person("Armin Sch{\\\"u}ler"),
+    as.person("Martin Posch"),
+    as.person("Franz K{\\\"o}nig")),
+  journal = "Pharmaceutical statistics",
+  volume = "20",
+  number = "1",
+  pages = "129--145",
+  year = "2021",
+  textVersion = paste("Robin Ristl, Nicolas Ballarini, Heiko Götte, Armin Schüler, Martin Posch and Franz König (2021).", 
+               "Delayed treatment effects, treatment switching and heterogeneous patient populations: How to design and analyze RCTs in oncology.",
+               "Pharmaceutical statistics. 2021; 20(1):129-145."),
+  header = "Please cite the nph package by the following reference (open access):"
+)
